@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RobotApp.Core\RobotController.Core.csproj" />
-    <ProjectReference Include="..\RobotApp\RobotController.csproj" />
+    <ProjectReference Include="..\RobotController.Core\RobotController.Core.csproj" />
+    <ProjectReference Include="..\RobotController\RobotController.csproj" />
   </ItemGroup>
 
 </Project>

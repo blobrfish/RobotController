@@ -8,14 +8,14 @@ using RobotController;
 namespace Simulator.Tests
 {
     [TestClass]
-    public class Tests
+    public class OutputTests
     {
         IUI UI = new MyUI();
         IRobot Robot = new MyRobot();
         IRoom Room = new MyRoom();
 
         StringBuilder StringBuilder = new StringBuilder();
-        string FinalOutput
+        string ActualOutput
         {
             get
             {
@@ -50,14 +50,14 @@ namespace Simulator.Tests
         {
             //arrange
             string commands = "";
-            string expectedFinalPosition = "1 1 E";
+            string expectedOutput = "1 1 E";
             DoBasicArrangements(commands, robotStartPoistionAndFacingDirection: "1 1 E");
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
 
@@ -66,14 +66,14 @@ namespace Simulator.Tests
         {
             //arrange
             string commands = "LF";
-            string expectedFinalPosition = "0 1 W";
+            string expectedOutput = "0 1 W";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
 
@@ -82,14 +82,14 @@ namespace Simulator.Tests
         {
             //arrange
             string commands = "LF";
-            string expectedFinalPosition = "0 1 W";
+            string expectedOutput = "0 1 W";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -98,14 +98,14 @@ namespace Simulator.Tests
             //arrange
 
             string commands = "RRF";
-            string expectedFinalPosition = "1 2 S";
+            string expectedOutput = "1 2 S";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
 
@@ -115,14 +115,14 @@ namespace Simulator.Tests
             //arrange
 
             string commands = "F";
-            string expectedFinalPosition = "1 0 N";
+            string expectedOutput = "1 0 N";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -131,14 +131,14 @@ namespace Simulator.Tests
             //arrange
 
             string commands = "RRRRF";
-            string expectedFinalPosition = "1 0 N";
+            string expectedOutput = "1 0 N";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -147,14 +147,14 @@ namespace Simulator.Tests
             //arrange
 
             string commands = "LLLLF";
-            string expectedFinalPosition = "1 0 N";
+            string expectedOutput = "1 0 N";
             DoBasicArrangements(commands);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -164,14 +164,14 @@ namespace Simulator.Tests
             string commands = "F";
             string roomWidthAndDepth = "1 1";
             string robotStartPoistionAndFacingDirection = "0 0 N";
-            string expectedFinalPosition = "0 0 N";
+            string expectedOutput = "0 0 N";
             DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -181,14 +181,14 @@ namespace Simulator.Tests
             string commands = "RF";
             string roomWidthAndDepth = "1 1";
             string robotStartPoistionAndFacingDirection = "0 0 N";
-            string expectedFinalPosition = "0 0 E";
+            string expectedOutput = "0 0 E";
             DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
 
@@ -199,14 +199,14 @@ namespace Simulator.Tests
             string commands = "RRF";
             string roomWidthAndDepth = "1 1";
             string robotStartPoistionAndFacingDirection = "0 0 N";
-            string expectedFinalPosition = "0 0 S";
+            string expectedOutput = "0 0 S";
             DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
         [TestMethod]
@@ -216,14 +216,14 @@ namespace Simulator.Tests
             string commands = "RRRF";
             string roomWidthAndDepth = "1 1";
             string robotStartPoistionAndFacingDirection = "0 0 N";
-            string expectedFinalPosition = "0 0 W";
+            string expectedOutput = "0 0 W";
             DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
 
             //act
-            Controller.TurnOn(UI, Room, Robot);
+            App.Run(UI, Room, Robot);
 
             //assert
-            Assert.AreEqual<string>(expectedFinalPosition, FinalOutput);
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
         }
 
     }
