@@ -17,13 +17,13 @@ namespace RobotController.Core
         {
             foreach (var availableCommandType in AvailableCommandTypes)
             {
-                AvailableCommands.Add((Command)Activator.CreateInstance(availableCommandType,robot));
+                AvailableCommands.Add((Command)Activator.CreateInstance(availableCommandType, robot));
             }
         }
 
         public void RunCommands()
         {
-            if(this.RecievedCommands != null || this.RecievedCommands.Count >1)
+            if (this.RecievedCommands != null)
             {
                 foreach (var code in RecievedCommands)
                 {
@@ -34,16 +34,17 @@ namespace RobotController.Core
 
         public void ListenToCommands()
         {
-            string input = App.UI.GetRobotCommands(this.AvailableCommands);
-            if (!String.IsNullOrEmpty(input))
+            string inputAsString = App.UI.GetRobotCommands(this.AvailableCommands);
+            if (!String.IsNullOrEmpty(inputAsString))
             {
-                IEnumerable<char> seperatedInputs = input.ToCharArray();
-                foreach (char seperatedInput in seperatedInputs)
+                IEnumerable<char> inputAsChars = inputAsString.ToCharArray();
+                foreach (char inputAsChar in inputAsChars)
                 {
-                    this.RecievedCommands.Add(seperatedInput);
+                    this.RecievedCommands.Add(inputAsChar);
                 }
             }
-        
+
         }
     }
 }
+
