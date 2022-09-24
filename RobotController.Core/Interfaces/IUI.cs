@@ -8,8 +8,9 @@ namespace RobotController.Core.Interfaces
     {
         string GetRoomWidthAndDepth();
         string GetRobotStartPositionAndFacingDirection();
-        string GetRobotCommands(IEnumerable<Command> availableCommands);
+        string GetRobotCommands(IEnumerable<RobotCommand> availableCommands);
         void ShowRobotPositionAndFacingDirection(string position);
+        void ShowErrorMessage(string message);
 
     }
 }

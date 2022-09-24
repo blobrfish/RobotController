@@ -98,8 +98,9 @@ namespace Simulator.Tests
             //arrange
 
             string commands = "RRF";
+            string roomWidthAndDepth = "3 3";
             string expectedOutput = "1 2 S";
-            DoBasicArrangements(commands);
+            DoBasicArrangements(commands,roomWidthAndDepth);
 
             //act
             App.Run(UI, Room, Robot);
@@ -130,8 +131,8 @@ namespace Simulator.Tests
         {
             //arrange
 
-            string commands = "RRRRF";
-            string expectedOutput = "1 0 N";
+            string commands = "RRRR";
+            string expectedOutput = "1 1 N";
             DoBasicArrangements(commands);
 
             //act
@@ -146,8 +147,8 @@ namespace Simulator.Tests
         {
             //arrange
 
-            string commands = "LLLLF";
-            string expectedOutput = "1 0 N";
+            string commands = "LLLL";
+            string expectedOutput = "1 1 N";
             DoBasicArrangements(commands);
 
             //act

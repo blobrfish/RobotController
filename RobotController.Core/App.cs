@@ -7,33 +7,30 @@ namespace RobotController.Core
 {
     public class App
     {
-        public static IUI UI;
-        public IRobot Robot;
-        public static IRoom Room;
-        public static RobotCommandService CommandService;
-        
+        public static IUI UI { get; private set; }
+        IRobot Robot;
+        public static IRoom Room { get; private set; }
+        public static RobotCommandService CommandService { get; private set; }
+        bool HasAnyErrors => this.Robot == null || App.Room == null || App.UI == null ?  true : false;
+        string ErrorMessage => string.Format("No {0} was found", this.Robot == null ? "robot" : App.Room == null ? "room" : "UI");
         App(IUI uI, IRoom room, IRobot robot)
         {
             UI = uI;
             Room = room;
             Robot = robot;
+            CommandService = new RobotCommandService(this.Robot);
 
-            if (Room != null)
+            if (this.HasAnyErrors)
+            {
+                App.UI.ShowErrorMessage(this.ErrorMessage);
+            }
+            else
             {
                 Room.SetDimensions();
-            }
-
-            if (Robot != null)
-            {
                 Robot.SetStartPositionAndFacingDirection();
+                CommandService.Run();
+                UI.ShowRobotPositionAndFacingDirection(Robot.CurrentPositionAndFacingDirection);
             }
-            CommandService = new RobotCommandService(this.Robot);
-            CommandService.ListenToCommands();
-            CommandService.RunCommands();
-
-            UI.ShowRobotPositionAndFacingDirection(Robot.CurrentPositionAndFacingDirection);
-            
-          
         }
 
         public static App Run(IUI uI, IRoom room, IRobot robot)

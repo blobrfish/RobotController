@@ -7,21 +7,21 @@ namespace RobotController.Core
 {
     public class RobotCommandService
     {
-        IList<Command> AvailableCommands = new List<Command>();
+        IList<RobotCommand> AvailableCommands = new List<RobotCommand>();
         IList<char> RecievedCommands = new List<char>();
         IEnumerable<Type> AvailableCommandTypes => AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => typeof(Command).IsAssignableFrom(p) && !p.IsAbstract);
+                .Where(p => typeof(RobotCommand).IsAssignableFrom(p) && !p.IsAbstract);
 
         public RobotCommandService(IRobot robot)
         {
             foreach (var availableCommandType in AvailableCommandTypes)
             {
-                AvailableCommands.Add((Command)Activator.CreateInstance(availableCommandType, robot));
+                AvailableCommands.Add((RobotCommand)Activator.CreateInstance(availableCommandType,robot));
             }
         }
 
-        public void RunCommands()
+        void RunCommands()
         {
             if (this.RecievedCommands != null)
             {
@@ -32,7 +32,13 @@ namespace RobotController.Core
             }
         }
 
-        public void ListenToCommands()
+        public void Run()
+        {
+            this.ListenToCommands();
+            this.RunCommands();
+        }
+
+        void ListenToCommands()
         {
             string inputAsString = App.UI.GetRobotCommands(this.AvailableCommands);
             if (!String.IsNullOrEmpty(inputAsString))
@@ -43,7 +49,6 @@ namespace RobotController.Core
                     this.RecievedCommands.Add(inputAsChar);
                 }
             }
-
         }
     }
 }

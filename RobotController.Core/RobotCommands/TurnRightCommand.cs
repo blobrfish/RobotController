@@ -7,9 +7,9 @@ using RobotController.Core.Abstractions;
 using RobotController.Core.Interfaces;
 namespace RobotController.Core.RobotCommands
 {
-        public class TurnRightCommand : Command
+        public class TurnRightCommand : RobotCommand
         {
-            public TurnRightCommand(IRobot robot) : base(robot,'R', "Turn right")
+            public TurnRightCommand( IRobot robot) : base(robot,'R', "Turn right")
             { }
             public override void Execute()
             {

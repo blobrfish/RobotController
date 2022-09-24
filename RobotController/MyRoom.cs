@@ -11,11 +11,11 @@ namespace RobotController
     {
         int Width;
         int Depth;
-        int MaxX;
-        int MaxY;
+        int MaxX => this.Width - 1;
+        int MaxY => this.Depth - 1;
         readonly int MinXY = 0;
 
-        public bool IsPositionWithinTable(Position position)
+        public bool IsPositionWithinRoom(Position position)
         {
             int x = position.X;
             int y = position.Y;

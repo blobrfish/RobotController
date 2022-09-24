@@ -8,7 +8,7 @@ namespace RobotController.Core.Interfaces
 {
     public interface IRoom
     {
-        bool IsPositionWithinTable(Position position);
+        bool IsPositionWithinRoom(Position position);
         void SetDimensions();
     }
 }

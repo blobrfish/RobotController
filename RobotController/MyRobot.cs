@@ -14,13 +14,7 @@ namespace RobotController
         IRoom Room => App.Room;
         public string CurrentPositionAndFacingDirection => string.Format("{0} {1}", this.Position.ToString(), (char)this.FacingDirection);
 
-      
-        bool CanMoveForward(Position nextPosition)
-        {
-            return Room.IsPositionWithinTable(nextPosition);
-        }
-
-        Position NextPosition
+        public Position NextPosition
         {
             get
             {
@@ -44,11 +38,7 @@ namespace RobotController
 
         public void MoveForward()
         {
-            Position nextPosition = this.NextPosition;
-            if (CanMoveForward(nextPosition))
-            {
-                this.Position = nextPosition;
-            }
+            this.Position = this.NextPosition;
         }
 
         public void TurnLeft()

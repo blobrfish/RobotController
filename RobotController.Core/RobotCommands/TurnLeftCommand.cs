@@ -8,7 +8,7 @@ using RobotController.Core.Interfaces;
 
 namespace RobotController.Core.RobotCommands
 {
-        public class TurnLeftCommand : Command
+        public class TurnLeftCommand : RobotCommand
         {
             public TurnLeftCommand(IRobot robot) : base(robot,'L', "Turn left")
             { }

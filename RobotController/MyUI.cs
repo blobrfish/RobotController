@@ -16,7 +16,7 @@ namespace RobotController
             return input;
         }
 
-        public string GetRobotCommands(IEnumerable<Command> availableCommands)
+        public string GetRobotCommands(IEnumerable<RobotCommand> availableCommands)
         {
             Console.WriteLine("Please enter the commands for the robot. F=Walk forward, L=Turn left, R=Turn right");
             for (int index = 0; index < availableCommands.Count(); index++)
@@ -42,6 +42,9 @@ namespace RobotController
             return input;
         }
 
-       
+        public void ShowErrorMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
     }
 }

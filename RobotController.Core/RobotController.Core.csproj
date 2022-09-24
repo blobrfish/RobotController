@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\Command.cs" />
+    <Compile Include="Abstractions\RobotCommand.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Enums\RobotFacingDirection.cs" />
     <Compile Include="Interfaces\IRobot.cs" />

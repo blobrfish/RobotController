@@ -9,6 +9,7 @@ namespace RobotController.Core.Interfaces
     public interface IRobot
     {
         string CurrentPositionAndFacingDirection { get; }
+        Position NextPosition { get; }
         void MoveForward();
         void TurnLeft();
         void TurnRight();
