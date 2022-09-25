@@ -10,8 +10,6 @@ namespace RobotController
     {
         Position Position;
         RobotFacingDirection FacingDirection;
-
-        IRoom Room => App.Room;
         public string CurrentPositionAndFacingDirection => string.Format("{0} {1}", this.Position.ToString(), (char)this.FacingDirection);
 
         public Position NextPosition
@@ -30,9 +28,7 @@ namespace RobotController
                 {
                     return this.Position.DecreaseX;
                 }
-
-              return this.Position.IncreaseX;
-           
+                return this.Position.IncreaseX;
             }
         }
 

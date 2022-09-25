@@ -7,7 +7,7 @@ namespace RobotController
     {
         static void Main(string[] args)
         {
-            App.Run(new MyUI(), new MyRoom(),  new MyRobot());
+            App.Run(new MyUI(), new MyRoom(), new MyRobot());
         }
     }
 }

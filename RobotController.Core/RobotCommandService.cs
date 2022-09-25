@@ -9,23 +9,26 @@ namespace RobotController.Core
     {
         IList<RobotCommand> AvailableCommands = new List<RobotCommand>();
         IList<char> RecievedCommands = new List<char>();
-        IEnumerable<Type> AvailableCommandTypes => AppDomain.CurrentDomain.GetAssemblies()
+        IEnumerable<Type> AvailableCommandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => typeof(RobotCommand).IsAssignableFrom(p) && !p.IsAbstract);
 
         public RobotCommandService(IRobot robot)
         {
-            foreach (var availableCommandType in AvailableCommandTypes)
+            if (this.AvailableCommandTypes != null)
             {
-                AvailableCommands.Add((RobotCommand)Activator.CreateInstance(availableCommandType,robot));
+                foreach (var availableCommandType in AvailableCommandTypes)
+                {
+                    AvailableCommands.Add((RobotCommand)Activator.CreateInstance(availableCommandType, robot));
+                }
             }
         }
 
-        void RunCommands()
+        void ExecuteCommands()
         {
             if (this.RecievedCommands != null)
             {
-                foreach (var code in RecievedCommands)
+                foreach (char code in RecievedCommands)
                 {
                     AvailableCommands.First(command => command.Code == code).Execute();
                 }
@@ -34,11 +37,11 @@ namespace RobotController.Core
 
         public void Run()
         {
-            this.ListenToCommands();
-            this.RunCommands();
+            this.ListenForCommands();
+            this.ExecuteCommands();
         }
 
-        void ListenToCommands()
+        void ListenForCommands()
         {
             string inputAsString = App.UI.GetRobotCommands(this.AvailableCommands);
             if (!String.IsNullOrEmpty(inputAsString))

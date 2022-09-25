@@ -18,7 +18,6 @@ namespace RobotController.Core
             UI = uI;
             Room = room;
             Robot = robot;
-            CommandService = new RobotCommandService(this.Robot);
 
             if (this.HasAnyErrors)
             {
@@ -26,6 +25,7 @@ namespace RobotController.Core
             }
             else
             {
+                CommandService = new RobotCommandService(this.Robot);
                 Room.SetDimensions();
                 Robot.SetStartPositionAndFacingDirection();
                 CommandService.Run();

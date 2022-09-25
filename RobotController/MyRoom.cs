@@ -11,8 +11,8 @@ namespace RobotController
     {
         int Width;
         int Depth;
-        int MaxX => this.Width - 1;
-        int MaxY => this.Depth - 1;
+        int MaxX;
+        int MaxY;
         readonly int MinXY = 0;
 
         public bool IsPositionWithinRoom(Position position)
@@ -27,6 +27,8 @@ namespace RobotController
             IList<string> inputSeperated = input.Split(' ');
             this.Width = Int32.Parse(inputSeperated[0]);
             this.Depth = Int32.Parse(inputSeperated[1]);
+            this.MaxX = this.Width - 1;
+            this.MaxY = this.Depth - 1;
         }
     }
 

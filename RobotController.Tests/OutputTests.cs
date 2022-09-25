@@ -127,7 +127,7 @@ namespace Simulator.Tests
         }
 
         [TestMethod]
-        public void Check_If_Robot_Moves_Full_Circle_Clockwise()
+        public void Check_If_Robot_Rotates_Full_Circle_Clockwise()
         {
             //arrange
 
@@ -143,7 +143,7 @@ namespace Simulator.Tests
         }
 
         [TestMethod]
-        public void Check_If_Robot_Moves_Full_Circle_Counter_Clockwise()
+        public void Check_If_Robot_Rotates_Full_Circle_Counter_Clockwise()
         {
             //arrange
 
@@ -218,6 +218,40 @@ namespace Simulator.Tests
             string roomWidthAndDepth = "1 1";
             string robotStartPoistionAndFacingDirection = "0 0 N";
             string expectedOutput = "0 0 W";
+            DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
+
+            //act
+            App.Run(UI, Room, Robot);
+
+            //assert
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
+        }
+
+        [TestMethod]
+        public void ExampleTest1()
+        {
+            //arrange
+            string commands = "RFRFFRFRF";
+            string roomWidthAndDepth = "5 5";
+            string robotStartPoistionAndFacingDirection = "1 2 N";
+            string expectedOutput = "1 3 N";
+            DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
+
+            //act
+            App.Run(UI, Room, Robot);
+
+            //assert
+            Assert.AreEqual<string>(expectedOutput, ActualOutput);
+        }
+
+        [TestMethod]
+        public void ExampleTest2()
+        {
+            //arrange
+            string commands = "RFLFFLRF";
+            string roomWidthAndDepth = "5 5";
+            string robotStartPoistionAndFacingDirection = "0 0 E";
+            string expectedOutput = "3 1 E";
             DoBasicArrangements(commands, roomWidthAndDepth, robotStartPoistionAndFacingDirection);
 
             //act
