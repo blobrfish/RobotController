@@ -12,68 +12,63 @@ namespace RobotController
         RobotFacingDirection FacingDirection;
         public string CurrentPositionAndFacingDirection => string.Format("{0} {1}", this.Position.ToString(), (char)this.FacingDirection);
 
+        readonly int NumberOfStepsForward = 1;
         public Position NextPosition
         {
             get
             {
-                if (FacingDirection == RobotFacingDirection.North)
+                switch(this.FacingDirection)
                 {
-                    return this.Position.DecreaseY;
+                    case RobotFacingDirection.North:
+                        return this.Position.DecreaseY(NumberOfStepsForward);
+                    case RobotFacingDirection.South:
+                        return this.Position.IncreaseY(NumberOfStepsForward);
+                    case RobotFacingDirection.West:
+                        return this.Position.DecreaseX(NumberOfStepsForward);
+                    default:
+                        return this.Position.IncreaseX(NumberOfStepsForward);
                 }
-                else if (FacingDirection == RobotFacingDirection.South)
-                {
-                    return this.Position.IncreaseY;
-                }
-                else if (FacingDirection == RobotFacingDirection.West)
-                {
-                    return this.Position.DecreaseX;
-                }
-                return this.Position.IncreaseX;
             }
         }
 
-        public void MoveForward()
-        {
-            this.Position = this.NextPosition;
-        }
+        public void MoveForward() => this.Position = this.NextPosition;
+    
 
         public void TurnLeft()
         {
-            if (FacingDirection == RobotFacingDirection.North)
+            switch (this.FacingDirection)
             {
-                this.FacingDirection = RobotFacingDirection.West;
-            }
-            else if (FacingDirection == RobotFacingDirection.South)
-            {
-                this.FacingDirection = RobotFacingDirection.East;
-            }
-            else if (FacingDirection == RobotFacingDirection.West)
-            {
-                this.FacingDirection = RobotFacingDirection.South;
-            }
-            else if (FacingDirection == RobotFacingDirection.East)
-            {
-                this.FacingDirection = RobotFacingDirection.North;
+                case RobotFacingDirection.North:
+                    this.FacingDirection = RobotFacingDirection.West;
+                    break;
+                case RobotFacingDirection.South:
+                    this.FacingDirection = RobotFacingDirection.East;
+                    break;
+                case RobotFacingDirection.West:
+                    this.FacingDirection = RobotFacingDirection.South;
+                    break;
+                default:
+                    this.FacingDirection = RobotFacingDirection.North;
+                    break;
             }
         }
 
         public void TurnRight()
         {
-            if (FacingDirection == RobotFacingDirection.North)
+            switch (this.FacingDirection)
             {
-                this.FacingDirection = RobotFacingDirection.East;
-            }
-            else if (FacingDirection == RobotFacingDirection.South)
-            {
-                this.FacingDirection = RobotFacingDirection.West;
-            }
-            else if (FacingDirection == RobotFacingDirection.West)
-            {
-                this.FacingDirection = RobotFacingDirection.North;
-            }
-            else if (FacingDirection == RobotFacingDirection.East)
-            {
-                this.FacingDirection = RobotFacingDirection.South;
+                case RobotFacingDirection.North:
+                    this.FacingDirection = RobotFacingDirection.East;
+                    break;
+                case RobotFacingDirection.South:
+                    this.FacingDirection = RobotFacingDirection.West;
+                    break;
+                case RobotFacingDirection.West:
+                    this.FacingDirection = RobotFacingDirection.North;
+                    break;
+                default:
+                    this.FacingDirection = RobotFacingDirection.South;
+                    break;
             }
         }
 
