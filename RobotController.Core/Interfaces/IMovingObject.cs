@@ -6,15 +6,23 @@ using System.Threading.Tasks;
 
 namespace RobotController.Core.Interfaces
 {
-    public interface IRobot
+    public interface IMovingObject : IMovable,ISensible
+    {}
+
+    public interface IMovable
     {
+        void SetStartPositionAndFacingDirection(string value);
         string CurrentPositionAndFacingDirection { get; }
         Position NextPosition { get; }
         void MoveForward();
         void TurnLeft();
         void TurnRight();
-        void SetStartPositionAndFacingDirection();
+    }
 
+    public interface ISensible
+    {
+        string GetEnviromentDimensions();
+        string GetStartPositionAndFacingDirection();
 
     }
 }

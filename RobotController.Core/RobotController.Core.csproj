@@ -41,18 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\RobotCommand.cs" />
+    <Compile Include="Abstractions\Command.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Enums\RobotFacingDirection.cs" />
-    <Compile Include="Interfaces\IRobot.cs" />
-    <Compile Include="Interfaces\IRoom.cs" />
+    <Compile Include="Enums\MovingObjectFacingDirection.cs" />
+    <Compile Include="Interfaces\IMovingObject.cs" />
+    <Compile Include="Interfaces\IEnviroment.cs" />
     <Compile Include="Interfaces\IUI.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RobotCommandService.cs" />
-    <Compile Include="RobotCommands\TurnLeftCommand.cs" />
-    <Compile Include="RobotCommands\TurnRightCommand.cs" />
-    <Compile Include="RobotCommands\WalkForwardCommand.cs" />
+    <Compile Include="CommandService.cs" />
+    <Compile Include="Commands\TurnLeftCommand.cs" />
+    <Compile Include="Commands\TurnRightCommand.cs" />
+    <Compile Include="Commands\WalkForwardCommand.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

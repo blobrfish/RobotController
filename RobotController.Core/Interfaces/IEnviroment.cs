@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RobotController.Core.Interfaces
 {
-    public interface IRoom
+    public interface IEnviroment
     {
-        bool IsPositionWithinRoom(Position position);
-        void SetDimensions();
+        bool IsPositionWithinEnviroment(Position position);
+        void SetDimensions(string value);
     }
 }

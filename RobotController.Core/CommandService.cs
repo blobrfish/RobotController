@@ -5,21 +5,22 @@ using RobotController.Core.Interfaces;
 using RobotController.Core.Abstractions;
 namespace RobotController.Core
 {
-    public class RobotCommandService
+    public class CommandService
     {
-        IList<RobotCommand> AvailableCommands = new List<RobotCommand>();
+        IList<Command> AvailableCommands = new List<Command>();
         IList<char> RecievedCommands = new List<char>();
         IEnumerable<Type> AvailableCommandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
-                .Where(p => typeof(RobotCommand).IsAssignableFrom(p) && !p.IsAbstract);
-
-        public RobotCommandService(IRobot robot)
+                .Where(p => typeof(Command).IsAssignableFrom(p) && !p.IsAbstract);
+        IUI UI;
+        public CommandService(IUI uI, IEnviroment enviroment, IMovable movable)
         {
+            this.UI = uI;
             if (this.AvailableCommandTypes != null)
             {
                 foreach (var availableCommandType in AvailableCommandTypes)
                 {
-                    AvailableCommands.Add((RobotCommand)Activator.CreateInstance(availableCommandType, robot));
+                    AvailableCommands.Add((Command)Activator.CreateInstance(availableCommandType, enviroment, movable));
                 }
             }
         }
@@ -43,7 +44,7 @@ namespace RobotController.Core
 
         void ListenForCommands()
         {
-            string inputAsString = App.UI.GetRobotCommands(this.AvailableCommands);
+            string inputAsString = this.UI.GetCommands(this.AvailableCommands);
             if (!String.IsNullOrEmpty(inputAsString))
             {
                 IEnumerable<char> inputAsChars = inputAsString.ToCharArray();

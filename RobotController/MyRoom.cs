@@ -7,7 +7,7 @@ using RobotController.Core.Interfaces;
 using RobotController.Core.Enums;
 namespace RobotController
 {
-    public class MyRoom : IRoom
+    public class MyRoom : IEnviroment
     {
         int Width;
         int Depth;
@@ -15,16 +15,15 @@ namespace RobotController
         int MaxY;
         readonly int MinXY = 0;
 
-        public bool IsPositionWithinRoom(Position position)
+        public bool IsPositionWithinEnviroment(Position position)
         {
             int x = position.X;
             int y = position.Y;
             return (this.MinXY <= x && x <= this.MaxX) && (this.MinXY <= y && y <= this.MaxY);
         }
-        public void SetDimensions()
+        public void SetDimensions(string value)
         {
-            string input = App.UI.GetRoomWidthAndDepth();
-            IList<string> inputSeperated = input.Split(' ');
+            IList<string> inputSeperated = value.Split(' ');
             this.Width = Int32.Parse(inputSeperated[0]);
             this.Depth = Int32.Parse(inputSeperated[1]);
             this.MaxX = this.Width - 1;

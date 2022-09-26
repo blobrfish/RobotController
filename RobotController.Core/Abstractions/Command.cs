@@ -2,18 +2,20 @@
 
 namespace RobotController.Core.Abstractions
 {
-    public abstract class RobotCommand
+    public abstract class Command
     {
 
-        protected IRobot Robot;
+        protected IMovable Movable;
+        protected IEnviroment Enviroment;
         public char Code { get; }
 
         protected readonly string Name;
         public string CodeAndName => string.Format("{0}={1}", this.Code, this.Name);
 
-        public RobotCommand(IRobot robot, char code, string name)
+        public Command(IEnviroment enviroment, IMovable movable, char code, string name)
         {
-            this.Robot = robot;
+            this.Enviroment = enviroment;
+            this.Movable = movable;
             this.Code = code;
             this.Name = name;
         }

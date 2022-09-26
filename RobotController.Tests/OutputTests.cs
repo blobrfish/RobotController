@@ -5,14 +5,14 @@ using System.Text;
 using RobotController.Core.Interfaces;
 using RobotController.Core;
 using RobotController;
-namespace Simulator.Tests
+namespace RobotController.Tests
 {
     [TestClass]
     public class OutputTests
     {
         IUI UI = new MyUI();
-        IRobot Robot = new MyRobot();
-        IRoom Room = new MyRoom();
+        IMovingObject Robot = new MyRobot();
+        IEnviroment Room = new MyRoom();
 
         StringBuilder StringBuilder = new StringBuilder();
         string ActualOutput

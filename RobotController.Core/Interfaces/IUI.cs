@@ -6,11 +6,8 @@ namespace RobotController.Core.Interfaces
 {
     public interface IUI
     {
-        string GetRoomWidthAndDepth();
-        string GetRobotStartPositionAndFacingDirection();
-        string GetRobotCommands(IEnumerable<RobotCommand> availableCommands);
-        void ShowRobotPositionAndFacingDirection(string position);
+        string GetCommands(IEnumerable<Command> availableCommands);
+        void ShowMovingObjectPositionAndFacingDirection(string position);
         void ShowErrorMessage(string message);
-
     }
 }

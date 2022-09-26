@@ -7,35 +7,40 @@ namespace RobotController.Core
 {
     public class App
     {
-        public static IUI UI { get; private set; }
-        IRobot Robot;
-        public static IRoom Room { get; private set; }
-        public static RobotCommandService CommandService { get; private set; }
-        bool HasAnyErrors => this.Robot == null || App.Room == null || App.UI == null ?  true : false;
-        string ErrorMessage => string.Format("No {0} was found", this.Robot == null ? "robot" : App.Room == null ? "room" : "UI");
-        App(IUI uI, IRoom room, IRobot robot)
+        readonly IUI UI;
+        readonly IMovingObject MovingObject;
+        readonly IEnviroment Enviroment;
+        readonly CommandService CommandService;
+        IMovable Movable => this.MovingObject;
+        ISensible Sensible => this.MovingObject;
+        string EnviromentDimensions => this.Sensible.GetEnviromentDimensions();
+        string StartPositionAndFacingDirection => this.Sensible.GetStartPositionAndFacingDirection();
+        bool HasAnyErrors => this.MovingObject == null || Enviroment == null || this.UI == null ?  true : false;
+        string ErrorMessage => string.Format("No {0} was found", this.MovingObject == null ? "moving object" : Enviroment == null ? "valid enviroment" : "UI");
+
+        App(IUI uI, IEnviroment enviroment, IMovingObject movingObject)
         {
             UI = uI;
-            Room = room;
-            Robot = robot;
+            Enviroment = enviroment;
+            MovingObject = movingObject;
 
             if (this.HasAnyErrors)
             {
-                App.UI.ShowErrorMessage(this.ErrorMessage);
+                UI.ShowErrorMessage(this.ErrorMessage);
             }
             else
             {
-                CommandService = new RobotCommandService(this.Robot);
-                Room.SetDimensions();
-                Robot.SetStartPositionAndFacingDirection();
+                CommandService = new CommandService(this.UI,this.Enviroment, this.Movable);
+                Enviroment.SetDimensions(this.EnviromentDimensions);
+                Movable.SetStartPositionAndFacingDirection(this.StartPositionAndFacingDirection);
                 CommandService.Run();
-                UI.ShowRobotPositionAndFacingDirection(Robot.CurrentPositionAndFacingDirection);
+                UI.ShowMovingObjectPositionAndFacingDirection(this.Movable.CurrentPositionAndFacingDirection);
             }
         }
 
-        public static App Run(IUI uI, IRoom room, IRobot robot)
+        public static App Run(IUI uI, IEnviroment enviroment, IMovingObject movingObject)
         {
-            return new App(uI, room, robot);
+            return new App(uI, enviroment, movingObject);
         }
     }
 }

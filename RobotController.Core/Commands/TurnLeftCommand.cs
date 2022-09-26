@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using RobotController.Core.Abstractions;
 using RobotController.Core.Interfaces;
 
-namespace RobotController.Core.RobotCommands
+namespace RobotController.Core.Commands
 {
-        public class TurnLeftCommand : RobotCommand
+        public class TurnLeftCommand : Command
         {
-            public TurnLeftCommand(IRobot robot) : base(robot,'L', "Turn left")
+            public TurnLeftCommand(IEnviroment enviroment, IMovable movable) : base(enviroment, movable, 'L', "Turn left")
             { }
             public override void Execute()
             {
-                this.Robot.TurnLeft();
+                this.Movable.TurnLeft();
             }
         }
   }
