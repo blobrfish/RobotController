@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Abstractions\Command.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="Enums\MovingObjectFacingDirection.cs" />
-    <Compile Include="Interfaces\IMovingObject.cs" />
+    <Compile Include="Enums\RobotFacingDirection.cs" />
+    <Compile Include="Interfaces\IRobot.cs" />
     <Compile Include="Interfaces\IEnviroment.cs" />
     <Compile Include="Interfaces\IUI.cs" />
     <Compile Include="Position.cs" />

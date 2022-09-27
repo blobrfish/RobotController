@@ -6,10 +6,10 @@ using RobotController.Core.Interfaces;
 
 namespace RobotController
 {
-    public class MyRobot : IMovingObject
+    public class MyRobot : IRobot
     {
         Position Position;
-        MovingObjectFacingDirection FacingDirection;
+        RobotFacingDirection FacingDirection;
         public string CurrentPositionAndFacingDirection => string.Format("{0} {1}", this.Position.ToString(), (char)this.FacingDirection);
 
         readonly int StepsForward = 1;
@@ -17,13 +17,14 @@ namespace RobotController
         {
             get
             {
+
                 switch (this.FacingDirection)
                 {
-                    case MovingObjectFacingDirection.North:
+                    case RobotFacingDirection.North:
                         return this.Position.DecreaseY(StepsForward);
-                    case MovingObjectFacingDirection.South:
+                    case RobotFacingDirection.South:
                         return this.Position.IncreaseY(StepsForward);
-                    case MovingObjectFacingDirection.West:
+                    case RobotFacingDirection.West:
                         return this.Position.DecreaseX(StepsForward);
                     default:
                         return this.Position.IncreaseX(StepsForward);
@@ -31,43 +32,50 @@ namespace RobotController
             }
         }
 
-        public void MoveForward() => this.Position = this.NextPosition;
+        public void MoveForward()
+        {
+            Console.WriteLine("My robot moved forward!"); 
+            this.Position = this.NextPosition;
+        }
 
 
         public void TurnLeft()
         {
+            Console.WriteLine("My robot turned left!");
             switch (this.FacingDirection)
             {
-                case MovingObjectFacingDirection.North:
-                    this.FacingDirection = MovingObjectFacingDirection.West;
+                case RobotFacingDirection.North:
+                    this.FacingDirection = RobotFacingDirection.West;
                     break;
-                case MovingObjectFacingDirection.South:
-                    this.FacingDirection = MovingObjectFacingDirection.East;
+                case RobotFacingDirection.South:
+                    this.FacingDirection = RobotFacingDirection.East;
                     break;
-                case MovingObjectFacingDirection.West:
-                    this.FacingDirection = MovingObjectFacingDirection.South;
+                case RobotFacingDirection.West:
+                    this.FacingDirection = RobotFacingDirection.South;
                     break;
                 default:
-                    this.FacingDirection = MovingObjectFacingDirection.North;
+                    this.FacingDirection = RobotFacingDirection.North;
                     break;
             }
+            
         }
 
         public void TurnRight()
         {
+            Console.WriteLine("My robot turned right!");
             switch (this.FacingDirection)
             {
-                case MovingObjectFacingDirection.North:
-                    this.FacingDirection = MovingObjectFacingDirection.East;
+                case RobotFacingDirection.North:
+                    this.FacingDirection = RobotFacingDirection.East;
                     break;
-                case MovingObjectFacingDirection.South:
-                    this.FacingDirection = MovingObjectFacingDirection.West;
+                case RobotFacingDirection.South:
+                    this.FacingDirection = RobotFacingDirection.West;
                     break;
-                case MovingObjectFacingDirection.West:
-                    this.FacingDirection = MovingObjectFacingDirection.North;
+                case RobotFacingDirection.West:
+                    this.FacingDirection = RobotFacingDirection.North;
                     break;
                 default:
-                    this.FacingDirection = MovingObjectFacingDirection.South;
+                    this.FacingDirection = RobotFacingDirection.South;
                     break;
             }
         }
@@ -78,7 +86,7 @@ namespace RobotController
             int x = Int32.Parse(inputSeperated[0]);
             int y = Int32.Parse(inputSeperated[1]);
             this.Position = new Position(x, y);
-            this.FacingDirection = (MovingObjectFacingDirection)Char.Parse(inputSeperated[2]);
+            this.FacingDirection = (RobotFacingDirection)Char.Parse(inputSeperated[2]);
         }
         public string GetStartPositionAndFacingDirection()
         {

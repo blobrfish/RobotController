@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotController.Core.Enums
 {
-    public enum MovingObjectFacingDirection
+    public enum RobotFacingDirection
     {
         North = 'N', East = 'E', South = 'S', West = 'W'
     }

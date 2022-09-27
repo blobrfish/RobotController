@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RobotController.Core.Interfaces
 {
-    public interface IMovingObject : IMovable,ISensible
+    public interface IRobot : IMovable,ISensible
     {}
 
     public interface IMovable

@@ -8,21 +8,21 @@ namespace RobotController.Core
     public class App
     {
         readonly IUI UI;
-        readonly IMovingObject MovingObject;
+        readonly IRobot Robot;
         readonly IEnviroment Enviroment;
         readonly CommandService CommandService;
-        IMovable Movable => this.MovingObject;
-        ISensible Sensible => this.MovingObject;
+        IMovable Movable => this.Robot;
+        ISensible Sensible => this.Robot;
         string EnviromentDimensions => this.Sensible.GetEnviromentDimensions();
         string StartPositionAndFacingDirection => this.Sensible.GetStartPositionAndFacingDirection();
-        bool HasAnyErrors => this.MovingObject == null || Enviroment == null || this.UI == null ?  true : false;
-        string ErrorMessage => string.Format("No {0} was found", this.MovingObject == null ? "moving object" : Enviroment == null ? "valid enviroment" : "UI");
+        bool HasAnyErrors => this.Robot == null || Enviroment == null || this.UI == null ?  true : false;
+        string ErrorMessage => string.Format("No {0} was found", this.Robot == null ? "robot" : Enviroment == null ? "valid enviroment" : "UI");
 
-        App(IUI uI, IEnviroment enviroment, IMovingObject movingObject)
+        App(IUI uI, IEnviroment enviroment, IRobot robot)
         {
             UI = uI;
             Enviroment = enviroment;
-            MovingObject = movingObject;
+            Robot = robot;
 
             if (this.HasAnyErrors)
             {
@@ -34,13 +34,13 @@ namespace RobotController.Core
                 Enviroment.SetDimensions(this.EnviromentDimensions);
                 Movable.SetStartPositionAndFacingDirection(this.StartPositionAndFacingDirection);
                 CommandService.Run();
-                UI.ShowMovingObjectPositionAndFacingDirection(this.Movable.CurrentPositionAndFacingDirection);
+                UI.ShowRobotPositionAndFacingDirection(this.Movable.CurrentPositionAndFacingDirection);
             }
         }
 
-        public static App Run(IUI uI, IEnviroment enviroment, IMovingObject movingObject)
+        public static App Run(IUI uI, IEnviroment enviroment, IRobot robot)
         {
-            return new App(uI, enviroment, movingObject);
+            return new App(uI, enviroment, robot);
         }
     }
 }

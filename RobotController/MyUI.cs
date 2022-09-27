@@ -22,7 +22,7 @@ namespace RobotController
         }
 
 
-        public void ShowMovingObjectPositionAndFacingDirection(string postion)
+        public void ShowRobotPositionAndFacingDirection(string postion)
         {
             Console.WriteLine(postion);
         }

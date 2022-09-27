@@ -7,7 +7,7 @@ namespace RobotController.Core.Interfaces
     public interface IUI
     {
         string GetCommands(IEnumerable<Command> availableCommands);
-        void ShowMovingObjectPositionAndFacingDirection(string position);
+        void ShowRobotPositionAndFacingDirection(string position);
         void ShowErrorMessage(string message);
     }
 }

@@ -11,7 +11,7 @@ namespace RobotController.Tests
     public class OutputTests
     {
         IUI UI = new MyUI();
-        IMovingObject Robot = new MyRobot();
+        IRobot Robot = new MyRobot();
         IEnviroment Room = new MyRoom();
 
         StringBuilder StringBuilder = new StringBuilder();
